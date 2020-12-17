@@ -1,0 +1,14 @@
+.flex {
+    display: flex;
+}
+
+.flex .avg {
+    flex: 1;
+}
+
+code {
+    color: #000 !important;
+    font-weight: bold;
+    background: transparent;
+    /* text-decoration: underline; */
+}
