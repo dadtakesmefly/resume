@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>1px</title>
+    <style>
+      /* --- 缩放实现物理 1px 开始 ---- */
+      .scale-line {
+        height: 45px;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        position: relative;
+      }
+      .scale-line::after {
+        /* 
+          在这里自定义 border 的样式
+        */
+        border-width: 1px;
+        border-color: #222;
+        border-style: solid;
+        border-radius: 10px;
+      }
+
+      .border-1px::after {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        pointer-events: none;
+      }
+      @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+        .border-1px::after {
+          right: -100%;
+          bottom: -100%;
+          -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+          /* 1.5 * 10px */
+          border-radius: 15px;
+        }
+      }
+      @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+        .border-1px::after {
+          right: -200%;
+          bottom: -200%;
+          -webkit-transform: scale(0.33);
+          transform: scale(0.33);
+          /* 2 * 10px */
+          border-radius: 20px;
+        }
+      }
+      /* --- 缩放实现物理 1px 结束 ---- */
+
+      /* --- 线性渐变实现物理 1px 开始 ---- */
+      .gradient-line {
+        position: relative;
+        margin-top: 20px;
+      }
+      .line::after {
+        height: 1px;
+        content: '';
+        position: absolute;
+        background: #222;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+      @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+        .line::after {
+          background: -webkit-linear-gradient(top, #222, transparent);
+          background: linear-gradient(to bottom, #222, transparent);
+        }
+      }
+      @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+        .line::after {
+          background: -webkit-linear-gradient(
+            top,
+            #222,
+            transparent,
+            transparent
+          );
+          background: linear-gradient(
+            to bottom,
+            #222,
+            transparent,
+            transparent
+          );
+        }
+      }
+      /* --- 线性渐变实现物理 1px 结束 ---- */
+    </style>
+  </head>
+  <body>
+    <div>1、缩放实现物理 1px:</div>
+    <div class="scale-line border-1px"></div>
+
+    <div>2、线性渐变实现物理 1px:</div>
+    <div class="gradient-line line"></div>
+  </body>
+</html>
